@@ -13,6 +13,7 @@ public class Main_Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Character = Player_Manager.Instance.Get_Player();
         Camera_Move();
     }
 
@@ -20,7 +21,7 @@ public class Main_Camera : MonoBehaviour
     {
         Move_Vec = Character.GetComponent<Character>().Get_Forward_Vec();
         //Debug.Log(Move_Vec * 3);
-        transform.position = Character.GetComponent<Character>().transform.position - (Move_Vec * 3) + new Vector3(0f, 4f, 0f);
+        transform.position = Character.GetComponent<Character>().transform.position - (Move_Vec * 3) + new Vector3(0f, 5f, 0f);
 
         transform.rotation = Character.GetComponent<Character>().transform.rotation;
         transform.Rotate(new Vector3(10f, 0f, 0f));
