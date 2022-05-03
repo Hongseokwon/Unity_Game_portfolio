@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_Manager : MonoBehaviour
+public class Camera_Manager : MonoBehaviour
 {
-    private static Bullet_Manager instance = null;
+    private static Camera_Manager instance = null;
 
     void Awake()
     {
@@ -18,7 +18,7 @@ public class Bullet_Manager : MonoBehaviour
         }
     }
 
-    public static Bullet_Manager Instance
+    public static Camera_Manager Instance
     {
         get
         {
@@ -30,10 +30,7 @@ public class Bullet_Manager : MonoBehaviour
         }
     }
 
-    Bullet_Manager()
-    {
-        Bullet_List = new LinkedList<GameObject>();
-    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,16 +43,10 @@ public class Bullet_Manager : MonoBehaviour
         
     }
 
-    public void Add_Bullet(GameObject _Bullet)
+    public void Player_Find(GameObject _Player)
     {
-        Bullet_List.AddLast(_Bullet);
+        Main_Camera_Obj.GetComponent<Main_Camera>().Character = _Player;
     }
 
-    public void Del_Bullet(GameObject _Bullet)
-    {
-        Bullet_List.Remove(_Bullet);
-        Destroy(_Bullet);
-    }
-
-    LinkedList<GameObject> Bullet_List;
+    public GameObject Main_Camera_Obj;
 }

@@ -46,10 +46,17 @@ public class Player_Manager : MonoBehaviour
     {
         if (My_Player == null)
             My_Player = _Player;
+
+        Camera_Manager.Instance.Player_Find(_Player);
     }
 
     public bool Monster_Dis_Check(Vector3 _Monster_Pos)
     {
+        Vector3 Dis = _Monster_Pos - My_Player.transform.position;
+
+        if (Dis.magnitude < 15f)
+            return false;
+
         return true;
     }
 

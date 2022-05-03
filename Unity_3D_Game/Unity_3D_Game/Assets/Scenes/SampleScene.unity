@@ -314,13 +314,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 2070848069}
   - component: {fileID: 2070848068}
   - component: {fileID: 2070848067}
+  - component: {fileID: 2070848073}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -519,7 +520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 9119659351327650644, guid: c05ea8a33cebdd149a69a5c7925c00b3, type: 3}
   Monster: {fileID: 1422873717213098659, guid: f3b9233e8c04ee94e927b85d9f5143c1, type: 3}
-  Bullter: {fileID: 0}
+  Bullet: {fileID: 5215206526493140633, guid: 88524bd50e3032048b01808479c77c88, type: 3}
 --- !u!114 &2070848068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,3 +584,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2070848073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070848066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37de23a74c9d9ca40910ec87d0cbb4cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Main_Camera_Obj: {fileID: 963194225}
