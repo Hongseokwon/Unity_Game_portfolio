@@ -13,11 +13,9 @@ public class Main_Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Character = Player_Manager.Instance.Get_Player();
-        Camera_Move();
     }
 
-    private void Camera_Move()
+    public void Camera_Move()
     {
         Move_Vec = Character.GetComponent<Character>().Get_Forward_Vec();
         //Debug.Log(Move_Vec * 3);

@@ -4,6 +4,31 @@ using UnityEngine;
 
 public class Monster_Manager : MonoBehaviour
 {
+    private static Monster_Manager instance = null;
+
+    void Awake()
+    {
+        if (null == instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public static Monster_Manager Instance
+    {
+        get
+        {
+            if (null == instance)
+            {
+                return null;
+            }
+            return instance;
+        }
+    }
     public struct MONSTER_INFO
     {
         public MONSTER_INFO(Vector3 _Pos)
@@ -11,6 +36,7 @@ public class Monster_Manager : MonoBehaviour
             Live_Check = false;
             Monster_Pos = _Pos;
         }
+
 
         public bool Live_Check;
         public Vector3 Monster_Pos;
@@ -22,8 +48,8 @@ public class Monster_Manager : MonoBehaviour
         Monster_Info = new List<MONSTER_INFO>();
 
         Monster_Max_Num = 9;
-        Monster_Regen_Time = 0f;
-        Monster_Regen_Cycle_Time = 5f;
+        Monster_Regen_Time = 25f;
+        Monster_Regen_Cycle_Time = 30f;
     }
         
 
@@ -46,7 +72,13 @@ public class Monster_Manager : MonoBehaviour
 
     public void Del_Monster(GameObject _Monster)
     {
+        MONSTER_INFO Temp_Info = Monster_Info[_Monster.GetComponent<Monster>().Index_Num];
+        Temp_Info.Live_Check = false;
+        Monster_Info[_Monster.GetComponent<Monster>().Index_Num] = Temp_Info;
+
         Monster_List.Remove(_Monster);
+
+        Destroy(_Monster);
     }
 
     public bool Is_Monster(GameObject _Obj)
@@ -58,13 +90,12 @@ public class Monster_Manager : MonoBehaviour
         return true;
     }
 
-    private Vector3 Random_Pos(Vector3 _Pre_Pos)
+    private Vector3 Random_Pos(Vector3 _Pos)
     {
-        Vector3 Pos;
-
-        Pos = _Pre_Pos;
-
-        return Pos;//////////////////////////////////////////수정
+        _Pos.x += Random.Range(-30f, 30f);
+        _Pos.z += Random.Range(-30f, 30f);
+        
+        return _Pos;
     }
 
     private void Monster_Regen()
@@ -85,12 +116,12 @@ public class Monster_Manager : MonoBehaviour
         {
             Vector3 New_Monster_Pos = Random_Pos(Monster_Info[i].Monster_Pos);
 
-            if (Player_Manager.Instance.Monster_Dis_Check(New_Monster_Pos))
+            if (!Monster_Info[i].Live_Check && Player_Manager.Instance.Monster_Dis_Check(New_Monster_Pos))
             {
                 MONSTER_INFO Temp_Info = Monster_Info[i];
                 Temp_Info.Live_Check = true;
                 Monster_Info[i] = Temp_Info;
-                Add_Monster(prefab_Manager.Instance.Create_Monster(New_Monster_Pos));
+                Add_Monster(prefab_Manager.Instance.Create_Monster(New_Monster_Pos, i));
             }
         }
     }

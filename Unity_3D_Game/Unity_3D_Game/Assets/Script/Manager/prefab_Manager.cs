@@ -52,18 +52,24 @@ public class prefab_Manager : MonoBehaviour
         return New_Player;
     }
 
-    public GameObject Create_Monster(Vector3 _Pos)
+    public GameObject Create_Monster(Vector3 _Pos, int _Num)
     {
-        Debug.Log(_Pos);
         GameObject New_Monster = Instantiate(Monster);
         New_Monster.transform.position = _Pos;
+        New_Monster.GetComponent<Monster>().Index_Num = _Num;
 
         return New_Monster;
     }
 
+    public GameObject Create_Bullet(Vector3 _Pos,Quaternion _Rotate)
+    {
+        GameObject New_Bullet = Instantiate(Bullet, _Pos,_Rotate);
+
+        return New_Bullet;
+    }
+
+
     public GameObject Player;
-
     public GameObject Monster;
-
-    public GameObject Bullter;
+    public GameObject Bullet;
 }

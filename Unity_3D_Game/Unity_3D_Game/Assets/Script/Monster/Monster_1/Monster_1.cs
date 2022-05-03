@@ -14,32 +14,10 @@ public class Monster_1 : Monster
     // Update is called once per frame
     void Update()
     {
-        
+        Monster_Rotation();
     }
-
-    protected override void State_Check()
-    {
-
-
-    }
-
-    protected override void State_Act()
-    {
-        switch (State)
-        {
-            case Monster_State.Monster_Idle:
-
-                break;
-            case Monster_State.Monster_Move:
-                break;
-            case Monster_State.Monster_Dead:
-                break;
-            case Monster_State.Monster_End:
-                break;
-            default:
-                break;
-        }
-    }
+    
+    
 
 
     private void OnTriggerEnter(Collider other)
@@ -48,12 +26,20 @@ public class Monster_1 : Monster
         {
             Player_Manager.Instance.Get_Player().GetComponent<Character>().Collision_Back();
         }
-        
+        else if(other.tag == "Bullet")
+        {
+            Bullet_Manager.Instance.Del_Bullet(other.gameObject);
+
+            Monster_Manager.Instance.Del_Monster(gameObject);
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        
+        if (other.tag == "Character")
+        {
+            Player_Manager.Instance.Get_Player().GetComponent<Character>().Collision_Back();
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -61,20 +47,15 @@ public class Monster_1 : Monster
         
     }
 
+    
 
-
-    protected override void State_Idle()
-    {
+    private void Monster_Rotation()
+    { 
+        Vector3 temp;
+        temp = Player_Manager.Instance.Get_Player().transform.position - transform.position;
+        temp.y = 0;
+        transform.rotation = Quaternion.LookRotation(temp);
     }
-
-    protected override void State_Move()
-    {
-    }
-
-    protected override void State_Dead()
-    {
-    }
-
 
 
 }
